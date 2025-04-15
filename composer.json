@@ -1,0 +1,27 @@
+{
+    "name": "GuillaumeValadas/ai-context-bundle",
+    "description": "Symfony bundle to generate AI-readable project context (entities, routes, services...)",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guillaume",
+            "email": "guillaume.valadas@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "symfony/framework-bundle": "^6.0 || ^7.0",
+        "doctrine/orm": "^2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "AiContextBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        }
+    }
+}
