@@ -1,0 +1,6 @@
+services:
+    AiContextBundle\Command\:
+        resource: '../src/Command'
+        tags: ['console.command']
+        autowire: true
+        autoconfigure: true
