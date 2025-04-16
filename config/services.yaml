@@ -4,3 +4,4 @@ services:
         tags: ['console.command']
         autowire: true
         autoconfigure: true
+
