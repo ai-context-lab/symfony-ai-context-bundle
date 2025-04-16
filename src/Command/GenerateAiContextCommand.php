@@ -15,7 +15,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class GenerateAiContextCommand extends Command
 {
-    public function __construct(private readonly ManagerRegistry $doctrine)
+    public function __construct(
+        private readonly ManagerRegistry $doctrine,
+        private readonly ParameterBagInterface $params
+    )
     {
         parent::__construct();
     }
