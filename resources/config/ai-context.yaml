@@ -1,0 +1,5 @@
+ai_context:
+    include:
+        entities: true
+
+
