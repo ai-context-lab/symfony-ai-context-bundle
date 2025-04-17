@@ -27,10 +27,12 @@ class GenerateAiContextCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $includeEntities = $this->params->get('ai_context.include.entities');
+        $path = $this->params->get('ai_context.output_dir');
+        $filename = $this->params->get('ai_context.output_filename');
 
         if ($includeEntities) {
             $data = $this->entityContextGenerator->generate();
-            file_put_contents(__DIR__.'/../../var/ai_context/entities.json', json_encode($data, JSON_PRETTY_PRINT));
+            file_put_contents($path.$filename, json_encode($data, JSON_PRETTY_PRINT));
         }
 
         return Command::SUCCESS;

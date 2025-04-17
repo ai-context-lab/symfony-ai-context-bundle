@@ -5,3 +5,7 @@ services:
         autowire: true
         autoconfigure: true
 
+    AiContextBundle\Generator\:
+        resource: '../src/Generator'
+        autowire: true
+        autoconfigure: true

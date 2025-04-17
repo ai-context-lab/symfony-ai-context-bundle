@@ -11,14 +11,23 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('ai_context');
 
-        $treeBuilder->getRootNode()
+        $rootNode = $treeBuilder->getRootNode();
+        $rootNode
             ->children()
-            ->arrayNode('include')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->booleanNode('entities')->defaultTrue()->end()
-            ->end()
-            ->end()
+                ->arrayNode('include')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                    ->booleanNode('entities')->defaultTrue()->end()
+                    ->end()
+                ->end()
+
+                ->scalarNode('output_dir')
+                    ->defaultValue('%kernel.project_dir%/var/ai_context')
+                ->end()
+
+                ->scalarNode('output_filename')
+                    ->defaultValue('ai-context.json')
+                ->end()
             ->end();
 
         return $treeBuilder;
