@@ -1,7 +1,12 @@
 services:
     AiContextBundle\Command\:
         resource: '../src/Command'
-        tags: ['console.command']
+        tags: [ 'console.command' ]
+        autowire: true
+        autoconfigure: true
+
+    AiContextBundle\Builder\:
+        resource: '../src/Builder'
         autowire: true
         autoconfigure: true
 
@@ -9,3 +14,4 @@ services:
         resource: '../src/Generator'
         autowire: true
         autoconfigure: true
+
