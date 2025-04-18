@@ -1,6 +1,7 @@
 ai_context:
     include:
         entities: true
+        routes: true
     output_dir: '%kernel.project_dir%/'
     output_filename: 'ai-context.json'
     #output_dir: '%kernel.project_dir%/var/' # Uncomment this line to use the var directory instead of the project root

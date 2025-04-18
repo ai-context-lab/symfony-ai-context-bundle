@@ -17,7 +17,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('include')
                     ->addDefaultsIfNotSet()
                     ->children()
-                    ->booleanNode('entities')->defaultTrue()->end()
+                        ->booleanNode('entities')->defaultTrue()->end()
+                        ->booleanNode('routes')->defaultTrue()->end()
                     ->end()
                 ->end()
 
