@@ -13,6 +13,10 @@ class EntityContextGenerator
     {
     }
 
+    /**
+     * Generate the context for AI.
+     * @return array
+     */
     public function generate(): array
     {
         $entityManager = $this->doctrine->getManager();

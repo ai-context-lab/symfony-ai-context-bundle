@@ -14,6 +14,10 @@ class ServiceContextGenerator
     ) {
     }
 
+    /**
+     *
+     * @return array
+     */
     public function generate(): array
     {
         $finder = new Finder();

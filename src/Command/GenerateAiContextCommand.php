@@ -31,38 +31,39 @@ class GenerateAiContextCommand extends Command
         $filename = $this->params->get('ai_context.output_filename');
         $fullPath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($filename, DIRECTORY_SEPARATOR);
 
-        $io->writeln("Building AI context from your project...");
+        $io->section('Generating AI context...');
+
+        if (!is_dir($path)) {
+            if (!mkdir($path, 0755, true) && !is_dir($path)) {
+                $io->error("Failed to create output directory: $path");
+                return Command::FAILURE;
+            }
+        }
+
+        if (!is_writable($path)) {
+            $io->error("Output directory is not writable: $path");
+            return Command::FAILURE;
+        }
 
         $context = $this->contextBuilder->build();
         $isChecksumChanged = $this->contextBuilder->getIsChecksumChanged();
 
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true);
-        }
-
-        if (!is_dir($path)) {
-            $io->writeln("<error>Failed to create output directory: $path </error>");
-            return Command::FAILURE;
-        }
-
-        if (!is_writable($path)) {
-            $io->writeln("<error>The output directory is not writable: $path</error>");
-            return Command::FAILURE;
-        }
-
         $json = json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         if ($json === false) {
-            $io->writeln("<error>Failed to encode context as JSON: " . json_last_error_msg()."</error>");
+            $io->error("Failed to encode context as JSON: " . json_last_error_msg());
             return Command::FAILURE;
         }
 
-        file_put_contents($fullPath, $json);
-
         if ($isChecksumChanged) {
-            $io->writeln("New changes detected.");
-            $io->writeln("AI context successfully generated at: <info>$fullPath</info>");
+            if (file_exists($fullPath)) {
+                $io->warning("The file already exists and will be overwritten.");
+            }
+
+            file_put_contents($fullPath, $json);
+            $io->success("AI context successfully generated at:");
+            $io->writeln(" → $fullPath");
         } else {
-            $io->writeln("No changes detected. Same context reused at: $fullPath");
+            $io->note("No changes detected. Context file not updated.");
         }
 
         return Command::SUCCESS;

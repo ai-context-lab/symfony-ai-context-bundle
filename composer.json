@@ -1,6 +1,6 @@
 {
-    "name": "GuillaumeValadas/ai-context-bundle",
-    "description": "Symfony bundle to generate AI-readable project context (entities, routes, services...)",
+    "name": "ai-context/symfony-ai-context-bundle",
+    "description": "Symfony bundle to generate AI-readable project context.",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [

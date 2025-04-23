@@ -8,6 +8,10 @@ class RouteContextGenerator
 {
     public function __construct(private readonly RouterInterface $router) {}
 
+    /**
+     * Generate the context for AI.
+     * @return array
+     */
     public function generate(): array
     {
         $routes = $this->router->getRouteCollection();
