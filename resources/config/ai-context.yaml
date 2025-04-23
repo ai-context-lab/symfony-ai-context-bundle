@@ -2,6 +2,11 @@ ai_context:
     include:
         entities: true
         routes: true
+        services: true
+    paths:
+        entities: '%kernel.project_dir%/src/Entity'
+        services: '%kernel.project_dir%/src/Service'
     output_dir: '%kernel.project_dir%/'
     output_filename: 'ai-context.json'
     #output_dir: '%kernel.project_dir%/var/' # Uncomment this line to use the var directory instead of the project root
+    output_dir_checksum: '%kernel.project_dir%/var/ai-context/ai-context-checksum.json'

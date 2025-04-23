@@ -15,3 +15,15 @@ services:
         autowire: true
         autoconfigure: true
 
+    AiContextBundle\Generator\EntityContextGenerator:
+        arguments:
+            $entityPaths: '%ai_context.paths.entities%'
+            $doctrine: '@doctrine'
+
+    AiContextBundle\Generator\ServiceContextGenerator:
+        arguments:
+            $servicePaths: '%ai_context.paths.services%'
+
+    AiContextBundle\Service\ChecksumService:
+        arguments:
+            $checksumFile: '%ai_context.output_dir_checksum%'

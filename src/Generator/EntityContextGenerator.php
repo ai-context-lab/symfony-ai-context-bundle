@@ -6,7 +6,10 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class EntityContextGenerator
 {
-    public function __construct(private readonly ManagerRegistry $doctrine)
+    public function __construct(
+        private readonly array $entityPaths,
+        private readonly ManagerRegistry $doctrine
+    )
     {
     }
 

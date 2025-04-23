@@ -19,6 +19,21 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->booleanNode('entities')->defaultTrue()->end()
                         ->booleanNode('routes')->defaultTrue()->end()
+                        ->booleanNode('services')->defaultTrue()->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('paths')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->arrayNode('entities')
+                                ->scalarPrototype()->end()
+                                ->defaultValue(['src/Entity'])
+                            ->end()
+                        ->arrayNode('services')
+                            ->scalarPrototype()->end()
+                            ->defaultValue(['src/Service'])
+                        ->end()
                     ->end()
                 ->end()
 
@@ -28,6 +43,10 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('output_filename')
                     ->defaultValue('ai-context.json')
+                ->end()
+
+                ->scalarNode('output_dir_checksum')
+                    ->defaultValue('%kernel.project_dir%/var/ai_context/ai-context-checksum.json')
                 ->end()
             ->end();
 
