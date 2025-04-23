@@ -54,11 +54,7 @@ class GenerateAiContextCommand extends Command
             return Command::FAILURE;
         }
 
-        if ($isChecksumChanged) {
-            if (file_exists($fullPath)) {
-                $io->warning("The file already exists and will be overwritten.");
-            }
-
+        if ($isChecksumChanged || !file_exists($fullPath)) {
             file_put_contents($fullPath, $json);
             $io->success("AI context successfully generated at:");
             $io->writeln(" → $fullPath");
