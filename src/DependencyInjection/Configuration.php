@@ -21,6 +21,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('routes')->defaultTrue()->end()
                         ->booleanNode('services')->defaultTrue()->end()
                         ->booleanNode('controllers')->defaultTrue()->end()
+                        ->booleanNode('repositories')->defaultTrue()->end()
                     ->end()
                 ->end()
 
@@ -38,6 +39,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('controllers')
                             ->scalarPrototype()->end()
                             ->defaultValue(['src/Controller'])
+                        ->end()
+                        ->arrayNode('repositories')
+                            ->scalarPrototype()->end()
+                            ->defaultValue(['src/Repository'])
                         ->end()
                     ->end()
                 ->end()
