@@ -1,6 +1,7 @@
 <?php
 namespace AiContextBundle\Builder;
 
+use AiContextBundle\Generator\ControllerContextGenerator;
 use AiContextBundle\Generator\EntityContextGenerator;
 use AiContextBundle\Generator\RouteContextGenerator;
 use AiContextBundle\Generator\ServiceContextGenerator;
@@ -15,6 +16,7 @@ class ContextBuilder
         private readonly EntityContextGenerator $entityGenerator,
         private readonly RouteContextGenerator $routeGenerator,
         private readonly ServiceContextGenerator $serviceGenerator,
+        private readonly ControllerContextGenerator $controllerGenerator,
         private readonly ChecksumService $checksumService,
         private readonly RouterInterface $router,
         private readonly ParameterBagInterface $params
@@ -28,7 +30,8 @@ class ContextBuilder
     {
         $entityPaths = $this->params->get('ai_context.paths.entities') ?? [];
         $servicePaths = $this->params->get('ai_context.paths.services') ?? [];
-        $allPaths = array_merge($entityPaths, $servicePaths);
+        $controllerPaths = $this->params->get('ai_context.paths.controllers') ?? [];
+        $allPaths = array_merge($entityPaths, $servicePaths, $controllerPaths);
 
         if (!$this->checksumService->hasChanged($allPaths)) {
             $this->setIsChecksumChanged(false);
@@ -37,6 +40,10 @@ class ContextBuilder
 
         $this->setIsChecksumChanged(true);
         $context = [];
+
+        if ($this->params->get('ai_context.include.controllers')) {
+            $context['controllers'] = $this->controllerGenerator->generate();
+        }
 
         if ($this->params->get('ai_context.include.entities')) {
             $context['entities'] = $this->entityGenerator->generate();

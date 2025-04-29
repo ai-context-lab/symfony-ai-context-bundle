@@ -24,6 +24,10 @@ services:
         arguments:
             $servicePaths: '%ai_context.paths.services%'
 
+    AiContextBundle\Generator\ControllerContextGenerator:
+        arguments:
+            $controllerPaths: '%ai_context.paths.controllers%'
+
     AiContextBundle\Service\ChecksumService:
         arguments:
             $checksumFile: '%ai_context.output_dir_checksum%'

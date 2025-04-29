@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('entities')->defaultTrue()->end()
                         ->booleanNode('routes')->defaultTrue()->end()
                         ->booleanNode('services')->defaultTrue()->end()
+                        ->booleanNode('controllers')->defaultTrue()->end()
                     ->end()
                 ->end()
 
@@ -33,6 +34,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('services')
                             ->scalarPrototype()->end()
                             ->defaultValue(['src/Service'])
+                        ->end()
+                        ->arrayNode('controllers')
+                            ->scalarPrototype()->end()
+                            ->defaultValue(['src/Controller'])
                         ->end()
                     ->end()
                 ->end()
