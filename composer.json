@@ -3,6 +3,8 @@
     "description": "Symfony bundle to generate AI-readable project context.",
     "type": "symfony-bundle",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Guillaume",
@@ -15,9 +17,17 @@
         "symfony/finder": "^6.0 || ^7.0",
         "doctrine/orm": "^2.12 || ^3.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
     "autoload": {
         "psr-4": {
             "AiContextBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AiContextBundle\\Tests\\": "tests/"
         }
     },
     "extra": {
