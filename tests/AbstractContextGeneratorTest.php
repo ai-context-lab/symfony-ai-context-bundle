@@ -33,7 +33,7 @@ class AbstractContextGeneratorTest extends TestCase
         $generator = $this->createDummyGenerator();
 
         $classes = $generator->findClasses([
-            __DIR__ . '/../src/Command'
+            dirname(__DIR__) . '/src/Command'
         ]);
 
         $this->assertIsArray($classes);
@@ -53,6 +53,6 @@ class AbstractContextGeneratorTest extends TestCase
 
         $this->assertNull($class);
 
-        unlink($fakeFile); // Nettoyage
+        unlink($fakeFile);
     }
 }
