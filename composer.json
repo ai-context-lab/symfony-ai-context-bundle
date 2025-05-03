@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
-        "doctrine/orm": "^3.3"
+        "doctrine/orm": "^3.3",
+        "doctrine/doctrine-bundle": "^2.14"
     },
     "autoload": {
         "psr-4": {
