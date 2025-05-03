@@ -1,6 +1,6 @@
 <?php
 
-namespace AiContextBundle\Tests\Generator;
+namespace AiContextBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use AiContextBundle\Generator\AbstractContextGenerator;
