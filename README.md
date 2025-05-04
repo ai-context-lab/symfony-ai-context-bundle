@@ -1,10 +1,9 @@
 # Symfony AI Context Bundle
 
-[//]: # ([![build]&#40;https://github.com/ai-context-lab/symfony-ai-context-bundle/actions/workflows/ci.yml/badge.svg?branch=main&#41;]&#40;https://github.com/ai-context-lab/symfony-ai-context-bundle/actions/workflows/ci.yml&#41;)
-[![Packagist](https://img.shields.io/packagist/v/ai-context/symfony-ai-context-bundle.svg)](https://packagist.org/packages/ai-context/symfony-ai-context-bundle)
-[![PHP Version](https://img.shields.io/packagist/php-v/ai-context/symfony-ai-context-bundle)](https://php.net)
-
-[//]: # ([![License]&#40;https://img.shields.io/packagist/l/ai-context/symfony-ai-context-bundle&#41;])
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ai-context/symfony-ai-context-bundle.svg)](https://packagist.org/packages/ai-context/symfony-ai-context-bundle)
+[![Total Downloads](https://img.shields.io/packagist/dt/ai-context/symfony-ai-context-bundle.svg)](https://packagist.org/packages/ai-context/symfony-ai-context-bundle)
+[![Tests](https://github.com/ai-context-lab/symfony-ai-context-bundle/actions/workflows/ci.yml/badge.svg)](...)
+[![License](https://img.shields.io/github/license/ai-context-lab/symfony-ai-context-bundle.svg)](https://github.com/ai-context-lab/symfony-ai-context-bundle/blob/main/LICENSE)
 
 > 🔍 Automatically generate a structured, AI-readable JSON context from your Symfony application — including entities, services, controllers, routes and repositories.
 
