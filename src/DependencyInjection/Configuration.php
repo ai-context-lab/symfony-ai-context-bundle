@@ -4,6 +4,8 @@ namespace AiContextBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+
 
 class Configuration implements ConfigurationInterface
 {
@@ -11,6 +13,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('ai_context');
 
+        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
