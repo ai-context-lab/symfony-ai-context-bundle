@@ -1,0 +1,32 @@
+name: PHPStan
+
+on:
+    push:
+        branches: [ main, dev ]
+    pull_request:
+        branches: [ main, dev ]
+        workflow_dispatch:
+
+jobs:
+    phpstan:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                php: [ 8.2, 8.3 ]
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    tools: composer
+
+            -   name: Install dependencies
+                run: composer install --prefer-dist --no-progress
+
+            -   name: Run PHPStan
+                run: vendor/bin/phpstan analyse --no-progress --ansi

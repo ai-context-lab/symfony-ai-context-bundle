@@ -7,6 +7,9 @@ use ReflectionParameter;
 
 class ServiceContextGenerator extends AbstractContextGenerator
 {
+    /**
+     * @param array<int, string> $servicePaths
+     */
     public function __construct(
         private readonly array $servicePaths
     ) {}
@@ -33,6 +36,19 @@ class ServiceContextGenerator extends AbstractContextGenerator
         return $results;
     }
 
+    /**
+     * @return array{
+     *     name: string,
+     *     returnType: string,
+     *     parameters: array<int, array{
+     *         name: string,
+     *         type: string,
+     *         hasDefault: bool,
+     *         default: mixed|null
+     *     }>,
+     *     doc: string|false
+     * }
+     */
     private function extractMethod(ReflectionMethod $method): array
     {
         return [

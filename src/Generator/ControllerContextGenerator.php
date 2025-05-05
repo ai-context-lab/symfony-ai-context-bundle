@@ -10,6 +10,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ControllerContextGenerator extends AbstractContextGenerator
 {
+    /**
+     * @param array<int, string> $controllerPaths
+     */
     public function __construct(
         private readonly array $controllerPaths
     ) {
@@ -55,6 +58,9 @@ class ControllerContextGenerator extends AbstractContextGenerator
         return $controllers;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function extractMethod(ReflectionMethod $method): array
     {
         $methodData = [

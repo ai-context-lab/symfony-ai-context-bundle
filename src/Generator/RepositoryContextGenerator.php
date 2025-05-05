@@ -11,6 +11,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class RepositoryContextGenerator extends AbstractContextGenerator
 {
+    /**
+     * @param array<int, string> $repositoryPaths
+     */
     public function __construct(
         private readonly array $repositoryPaths
     ) {
@@ -53,6 +56,14 @@ class RepositoryContextGenerator extends AbstractContextGenerator
         return $repositories;
     }
 
+    /**
+     * @return array{
+     *     name: string,
+     *     returnType: string,
+     *     parameters: array<int, array{name: string, type: string, hasDefault: bool, default: mixed|null}>,
+     *     doc: string|false
+     * }
+     */
     private function extractMethod(ReflectionMethod $method): array
     {
         return [

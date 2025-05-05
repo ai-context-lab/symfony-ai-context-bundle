@@ -11,8 +11,7 @@ class ChecksumService
     }
 
     /**
-     * Calculate the checksum of the given paths.
-     * @param array $paths
+     * @param array<int, string> $paths
      * @return string
      */
     public function calculateChecksum(array $paths): string
@@ -36,8 +35,7 @@ class ChecksumService
     }
 
     /**
-     * Check if the checksum has changed since the last save.
-     * @param array $paths
+     * @param array<int, string> $paths
      * @return bool
      */
     public function hasChanged(array $paths): bool
@@ -49,8 +47,7 @@ class ChecksumService
     }
 
     /**
-     * Save the current checksum to a file.
-     * @param array $paths
+     * @param array<int, string> $paths
      * @return void
      */
     public function saveChecksum(array $paths): void
@@ -66,8 +63,12 @@ class ChecksumService
      */
     private function getLastChecksum(): ?string
     {
-        return file_exists($this->checksumFile)
-            ? file_get_contents($this->checksumFile)
-            : null;
+        if (!file_exists($this->checksumFile)) {
+            return null;
+        }
+
+        $content = file_get_contents($this->checksumFile);
+
+        return $content === false ? null : $content;
     }
 }
