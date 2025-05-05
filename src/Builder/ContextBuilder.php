@@ -1,4 +1,5 @@
 <?php
+
 namespace AiContextBundle\Builder;
 
 use AiContextBundle\Generator\ControllerContextGenerator;
@@ -8,25 +9,25 @@ use AiContextBundle\Generator\RouteContextGenerator;
 use AiContextBundle\Generator\ServiceContextGenerator;
 use AiContextBundle\Service\ChecksumService;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 class ContextBuilder
 {
-    private $isChecksumChanged;
+    private bool $isChecksumChanged;
+
     public function __construct(
-        private readonly EntityContextGenerator $entityGenerator,
-        private readonly RouteContextGenerator $routeGenerator,
-        private readonly ServiceContextGenerator $serviceGenerator,
+        private readonly EntityContextGenerator     $entityGenerator,
+        private readonly RouteContextGenerator      $routeGenerator,
+        private readonly ServiceContextGenerator    $serviceGenerator,
         private readonly ControllerContextGenerator $controllerGenerator,
         private readonly RepositoryContextGenerator $repositoryGenerator,
-        private readonly ChecksumService $checksumService,
-        private readonly RouterInterface $router,
-        private readonly ParameterBagInterface $params
-    ) {}
+        private readonly ChecksumService            $checksumService,
+        private readonly ParameterBagInterface      $params
+    ) {
+    }
 
     /**
      * Generate the context for AI.
-     * @return array
+     * @return array<string, array<array<string, mixed>>>
      */
     public function build(): array
     {
@@ -35,7 +36,12 @@ class ContextBuilder
         $controllerPaths = $this->params->get('ai_context.paths.controllers') ?? [];
         $repositoryPaths = $this->params->get('ai_context.paths.repositories') ?? [];
 
-        $allPaths = array_merge($entityPaths, $servicePaths, $controllerPaths, $repositoryPaths);
+        $allPaths = array_merge(
+            (array)$entityPaths,
+            (array)$servicePaths,
+            (array)$controllerPaths,
+            (array)$repositoryPaths
+        );
 
         if (!$this->checksumService->hasChanged($allPaths)) {
             $this->setIsChecksumChanged(false);
@@ -70,10 +76,18 @@ class ContextBuilder
         return $context;
     }
 
-    private function loadLastContextFromFile()
+    /**
+     * @return array<string, array<array<string, mixed>>>
+     */
+    private function loadLastContextFromFile(): array
     {
         $outputDir = $this->params->get('ai_context.output_dir');
         $filename = $this->params->get('ai_context.output_filename');
+
+        if (!is_string($outputDir) || !is_string($filename)) {
+            return [];
+        }
+
         $fullPath = rtrim($outputDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($filename, DIRECTORY_SEPARATOR);
 
         if (!file_exists($fullPath)) {
@@ -94,7 +108,7 @@ class ContextBuilder
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function getIsChecksumChanged()
     {
@@ -102,7 +116,7 @@ class ContextBuilder
     }
 
     /**
-     * @param mixed $isChecksumChanged
+     * @param bool $isChecksumChanged
      */
     public function setIsChecksumChanged(bool $isChecksumChanged): void
     {

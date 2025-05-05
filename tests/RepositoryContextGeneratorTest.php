@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class RepositoryContextGeneratorTest extends TestCase
 {
-    public function testGenerateWithConcreteRepository()
+    public function testGenerateWithConcreteRepository(): void
     {
         $generator = new RepositoryContextGenerator([
             __DIR__ . '/fixtures/Repository'
@@ -15,6 +15,7 @@ class RepositoryContextGeneratorTest extends TestCase
 
         $results = $generator->generate();
 
+        /** @phpstan-ignore-next-line */
         $this->assertIsArray($results);
         $this->assertNotEmpty($results);
 

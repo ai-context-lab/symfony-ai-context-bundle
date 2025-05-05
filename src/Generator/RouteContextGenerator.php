@@ -10,7 +10,7 @@ class RouteContextGenerator
 
     /**
      * Generate the context for AI.
-     * @return array
+     * @return array<int, array<string, mixed>>
      */
     public function generate(): array
     {
