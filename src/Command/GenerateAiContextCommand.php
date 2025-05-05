@@ -29,15 +29,19 @@ class GenerateAiContextCommand extends Command
 
         $path = $this->params->get('ai_context.output_dir');
         $filename = $this->params->get('ai_context.output_filename');
+
+        if (!is_string($path) || !is_string($filename)) {
+            $io->writeln('<error>Invalid configuration: output_dir and output_filename must be strings.</error>');
+            return Command::FAILURE;
+        }
+
         $fullPath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . ltrim($filename, DIRECTORY_SEPARATOR);
 
         $io->section('Generating AI context...');
 
-        if (!is_dir($path)) {
-            if (!mkdir($path, 0755, true) && !is_dir($path)) {
-                $io->error("Failed to create output directory: $path");
-                return Command::FAILURE;
-            }
+        if (!is_dir($path) && !mkdir($path, 0755, true) && !is_dir($path)) {
+            $io->error("Failed to create output directory: $path");
+            return Command::FAILURE;
         }
 
         if (!is_writable($path)) {
