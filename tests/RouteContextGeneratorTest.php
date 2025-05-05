@@ -10,7 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RouteContextGeneratorTest extends TestCase
 {
-    public function testGenerateReturnsExpectedRoutes()
+    public function testGenerateReturnsExpectedRoutes(): void
     {
         $routeCollection = new RouteCollection();
 
@@ -23,6 +23,7 @@ class RouteContextGeneratorTest extends TestCase
         $generator = new RouteContextGenerator($routerMock);
         $context = $generator->generate();
 
+        /** @phpstan-ignore-next-line */
         $this->assertIsArray($context);
         $this->assertCount(1, $context);
 
