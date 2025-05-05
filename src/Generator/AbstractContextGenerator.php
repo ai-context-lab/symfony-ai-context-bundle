@@ -6,6 +6,10 @@ use Symfony\Component\Finder\Finder;
 
 abstract class AbstractContextGenerator
 {
+    /**
+     * @param array<int, string> $paths
+     * @return array<int, class-string>
+     */
     protected function findClasses(array $paths): array
     {
         $finder = new Finder();
@@ -24,9 +28,10 @@ abstract class AbstractContextGenerator
         return $classes;
     }
 
+
     protected function getClassFromFile(string $filePath): ?string
     {
-        $contents = file_get_contents($filePath);
+        $contents = file_get_contents($filePath) ?: '';
 
         if (!preg_match('/namespace\s+([^;]+);/', $contents, $namespaceMatch)) {
             return null;
@@ -39,5 +44,8 @@ abstract class AbstractContextGenerator
         return $namespaceMatch[1] . '\\' . $classMatch[1];
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
     abstract public function generate(): array;
 }
