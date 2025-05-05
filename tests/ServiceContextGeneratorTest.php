@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ServiceContextGeneratorTest extends TestCase
 {
-    public function testGenerateWithConcreteService()
+    public function testGenerateWithConcreteService(): void
     {
         $generator = new ServiceContextGenerator([
             __DIR__ . '/fixtures/Service'
@@ -15,6 +15,7 @@ class ServiceContextGeneratorTest extends TestCase
 
         $results = $generator->generate();
 
+        /** @phpstan-ignore-next-line */
         $this->assertIsArray($results);
         $this->assertNotEmpty($results);
 

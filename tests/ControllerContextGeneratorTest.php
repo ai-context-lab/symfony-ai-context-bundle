@@ -7,7 +7,7 @@ use AiContextBundle\Generator\ControllerContextGenerator;
 
 class ControllerContextGeneratorTest extends TestCase
 {
-    public function testGenerateReturnsValidControllerData()
+    public function testGenerateReturnsValidControllerData(): void
     {
         $generator = new ControllerContextGenerator([
             __DIR__ . '/fixtures/Controller'
@@ -15,6 +15,7 @@ class ControllerContextGeneratorTest extends TestCase
 
         $controllers = $generator->generate();
 
+        /** @phpstan-ignore-next-line */
         $this->assertIsArray($controllers);
         $this->assertNotEmpty($controllers);
 
