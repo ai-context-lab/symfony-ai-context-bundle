@@ -4,6 +4,7 @@ namespace AiContextBundle\Builder;
 
 use AiContextBundle\Generator\ControllerContextGenerator;
 use AiContextBundle\Generator\EntityContextGenerator;
+use AiContextBundle\Generator\EventContextGenerator;
 use AiContextBundle\Generator\RepositoryContextGenerator;
 use AiContextBundle\Generator\RouteContextGenerator;
 use AiContextBundle\Generator\ServiceContextGenerator;
@@ -20,6 +21,7 @@ class ContextBuilder
         private readonly ServiceContextGenerator    $serviceGenerator,
         private readonly ControllerContextGenerator $controllerGenerator,
         private readonly RepositoryContextGenerator $repositoryGenerator,
+        private readonly EventContextGenerator      $eventGenerator,
         private readonly ChecksumService            $checksumService,
         private readonly ParameterBagInterface      $params
     ) {
@@ -35,17 +37,22 @@ class ContextBuilder
         $servicePaths = $this->params->get('ai_context.paths.services') ?? [];
         $controllerPaths = $this->params->get('ai_context.paths.controllers') ?? [];
         $repositoryPaths = $this->params->get('ai_context.paths.repositories') ?? [];
+        $eventPaths = $this->params->get('ai_context.paths.events') ?? [];
 
         $allPaths = array_merge(
             (array)$entityPaths,
             (array)$servicePaths,
             (array)$controllerPaths,
-            (array)$repositoryPaths
+            (array)$repositoryPaths,
+            (array)$eventPaths
         );
 
         if (!$this->checksumService->hasChanged($allPaths)) {
             $this->setIsChecksumChanged(false);
-            return $this->loadLastContextFromFile();
+            $context = $this->loadLastContextFromFile();
+            if (!empty($context)) {
+                return $context;
+            }
         }
 
         $this->setIsChecksumChanged(true);
@@ -69,6 +76,10 @@ class ContextBuilder
 
         if ($this->params->get('ai_context.include.services')) {
             $context['services'] = $this->serviceGenerator->generate();
+        }
+
+        if ($this->params->get('ai_context.include.events')) {
+            $context['events'] = $this->eventGenerator->generate();
         }
 
         $this->checksumService->saveChecksum($allPaths);
