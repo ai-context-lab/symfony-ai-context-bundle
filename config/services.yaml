@@ -32,6 +32,10 @@ services:
         arguments:
             $repositoryPaths: '%ai_context.paths.repositories%'
 
+    AiContextBundle\Generator\EventContextGenerator:
+        arguments:
+            $eventPaths: '%ai_context.paths.events%'
+
     AiContextBundle\Service\ChecksumService:
         arguments:
             $checksumFile: '%ai_context.output_dir_checksum%'

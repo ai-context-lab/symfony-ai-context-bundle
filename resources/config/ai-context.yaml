@@ -8,9 +8,11 @@ ai_context:
         services: true
         controllers: true
         repositories: true
+        events: true
     paths:
         entities: '%kernel.project_dir%/src/Entity'
         services: '%kernel.project_dir%/src/Service'
         controllers: '%kernel.project_dir%/src/Controller'
         repository: '%kernel.project_dir%/src/Repository'
+        events: '%kernel.project_dir%/src/Event'
 
