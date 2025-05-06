@@ -14,6 +14,7 @@ class EventContextGeneratorTest extends TestCase
 
         $result = $generator->generate();
 
+        /** @phpstan-ignore-next-line */
         $this->assertIsArray($result);
         $this->assertNotEmpty($result);
 
