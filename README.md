@@ -15,6 +15,7 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
+- [Output example](#ouput-example)
 - [Example prompts](#example-prompts)
 - [Contributing](#contributing)
 - [License](#license)
@@ -80,6 +81,79 @@ The command outputs a structured JSON file (by default in var/ai_context/ai-cont
     🚦 Routes: method/path/controller mapping
 
     📚 Repositories: custom public methods
+
+
+## Ouput example
+
+```JSON
+{
+    "entities": [
+        {
+            "entity": "App\\Entity\\Article",
+            "fields": {
+                "id": "integer",
+                "name": "string",
+                "createdAt": "datetime_immutable",
+                "updatedAt": "datetime_immutable"
+            },
+            "associations": {
+                "category": "ManyToOne => App\\Entity\\Category",
+                "inventories": "OneToMany => App\\Entity\\Inventory"
+            }
+        }
+    ],
+    "controllers": [
+        {
+            "class": "App\\Controller\\ArticleController",
+            "short": "ArticleController",
+            "methods": [
+                {
+                    "name": "new",
+                    "parameters": [
+                        "$request: Symfony\\Component\\HttpFoundation\\Request",
+                        "$entityManager: Doctrine\\ORM\\EntityManagerInterface"
+                    ],
+                    "route": {
+                        "path": "/article/new",
+                        "methods": ["POST", "GET"],
+                        "name": "app_article_new"
+                    }
+                }
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "name": "app_article_new",
+            "path": "/article/new",
+            "methods": ["POST", "GET"],
+            "controller": "App\\Controller\\ArticleController::new",
+            "defaults": {},
+            "requirements": {}
+        }
+    ],
+    "services": [
+        {
+            "class": "App\\Service\\StockManagerService",
+            "short": "StockManagerService",
+            "methods": [
+                {
+                    "name": "processStock",
+                    "parameters": [
+                        {"name": "articleName", "type": "string"},
+                        {"name": "quantity", "type": "int"},
+                        {"name": "action", "type": "string"},
+                        {"name": "categoryName", "type": "?string"},
+                        {"name": "user", "type": "?App\\Entity\\User"}
+                    ],
+                    "returnType": "void"
+                }
+            ]
+        }
+    ]
+}
+
+```
 
 Perfect to feed into LLMs like GPT for project understanding.
 
