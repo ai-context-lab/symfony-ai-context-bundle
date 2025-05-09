@@ -83,7 +83,7 @@ The command outputs a structured JSON file (by default in var/ai_context/ai-cont
     📚 Repositories: custom public methods
 
 
-## Ouput example
+## Output example
 
 ```JSON
 {
