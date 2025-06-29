@@ -1,18 +1,20 @@
 ai_context:
-    output_dir: '%kernel.project_dir%/'
-    output_filename: 'ai-context.json'
-    output_dir_checksum: '%kernel.project_dir%/var/ai-context/ai-context-checksum.json'
-    include:
-        routes: true
-        entities: true
-        services: true
-        controllers: true
-        repositories: true
-        events: true
-    paths:
-        entities: '%kernel.project_dir%/src/Entity'
-        services: '%kernel.project_dir%/src/Service'
-        controllers: '%kernel.project_dir%/src/Controller'
-        repository: '%kernel.project_dir%/src/Repository'
-        events: '%kernel.project_dir%/src/Event'
+  output_dir: '%kernel.project_dir%/'
+  output_filename: 'ai-context.json'
+  output_dir_checksum: '%kernel.project_dir%/var/ai-context/ai-context-checksum.json'
+  include:
+    routes: true
+    entities: true
+    services: true
+    controllers: true
+    repositories: true
+    events: true
+    forms: true
+  paths:
+    entities: [ '%kernel.project_dir%/src/Entity' ]
+    services: [ '%kernel.project_dir%/src/Service' ]
+    controllers: [ '%kernel.project_dir%/src/Controller' ]
+    repositories: [ '%kernel.project_dir%/src/Repository' ]
+    events: [ '%kernel.project_dir%/src/Event' ]
+    forms: [ '%kernel.project_dir%/src/Form' ]
 

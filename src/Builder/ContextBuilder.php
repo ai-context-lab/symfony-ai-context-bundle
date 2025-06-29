@@ -5,6 +5,7 @@ namespace AiContextBundle\Builder;
 use AiContextBundle\Generator\ControllerContextGenerator;
 use AiContextBundle\Generator\EntityContextGenerator;
 use AiContextBundle\Generator\EventContextGenerator;
+use AiContextBundle\Generator\FormContextGenerator;
 use AiContextBundle\Generator\RepositoryContextGenerator;
 use AiContextBundle\Generator\RouteContextGenerator;
 use AiContextBundle\Generator\ServiceContextGenerator;
@@ -22,6 +23,7 @@ class ContextBuilder
         private readonly ControllerContextGenerator $controllerGenerator,
         private readonly RepositoryContextGenerator $repositoryGenerator,
         private readonly EventContextGenerator      $eventGenerator,
+        private readonly FormContextGenerator       $formContextGenerator,
         private readonly ChecksumService            $checksumService,
         private readonly ParameterBagInterface      $params
     ) {
@@ -38,13 +40,15 @@ class ContextBuilder
         $controllerPaths = $this->params->get('ai_context.paths.controllers') ?? [];
         $repositoryPaths = $this->params->get('ai_context.paths.repositories') ?? [];
         $eventPaths = $this->params->get('ai_context.paths.events') ?? [];
+        $formPaths = $this->params->get('ai_context.paths.forms') ?? [];
 
         $allPaths = array_merge(
             (array)$entityPaths,
             (array)$servicePaths,
             (array)$controllerPaths,
             (array)$repositoryPaths,
-            (array)$eventPaths
+            (array)$eventPaths,
+            (array)$formPaths
         );
 
         if (!$this->checksumService->hasChanged($allPaths)) {
@@ -80,6 +84,10 @@ class ContextBuilder
 
         if ($this->params->get('ai_context.include.events')) {
             $context['events'] = $this->eventGenerator->generate();
+        }
+
+        if ($this->params->get('ai_context.include.forms')) {
+            $context['forms'] = $this->formContextGenerator->generate();
         }
 
         $this->checksumService->saveChecksum($allPaths);
