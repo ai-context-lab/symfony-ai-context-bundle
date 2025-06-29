@@ -6,8 +6,7 @@
 [![PHPStan](https://github.com/ai-context-lab/symfony-ai-context-bundle/actions/workflows/phpstan.yml/badge.svg)](https://github.com/ai-context-lab/symfony-ai-context-bundle/actions/workflows/phpstan.yml)
 
 
-> 🔍 Automatically generate a structured, AI-readable JSON context from your Symfony application — including entities, services, controllers, routes and repositories.
-
+> 🔍 Automatically generate a structured, AI-ready JSON context from your Symfony application — including entities, services, controllers, routes, repositories, and more. Perfect for feeding to LLMs like GPT for code understanding, generation, or assistance.
 ---
 
 ## Table of Contents
@@ -15,7 +14,8 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [Output example](#ouput-example)
+- [Supported extractors](#supported-extractors)
+- [Output example](#output-example)
 - [Example prompts](#example-prompts)
 - [Contributing](#contributing)
 - [License](#license)
@@ -44,7 +44,7 @@ Configure the bundle in `config/packages/ai_context.yaml` you can edit the defau
 
 ```yaml
 ai_context:
-    output_dir: '%kernel.project_dir%/'
+    output_dir: '%kernel.project_dir%/var/ai_context'
     output_filename: 'ai-context.json'
     output_dir_checksum: '%kernel.project_dir%/var/ai-context/ai-context-checksum.json'
     include:
@@ -74,15 +74,17 @@ php bin/console ai-context:generate
 
 The command outputs a structured JSON file (by default in var/ai_context/ai-context.json) including:
 
-    🧩 Entities: class names, fields, types, relations
+## Supported extractors
 
-    🛠️ Services: method signatures and parameters
-
-    🎮 Controllers: public actions and @IsGranted annotations
-
-    🚦 Routes: method/path/controller mapping
-
-    📚 Repositories: custom public methods
+| Feature       | Description                                  |
+|---------------|----------------------------------------------|
+| Entities      | Doctrine field types and associations        |
+| Services      | Public methods with full type signatures     |
+| Controllers   | Public actions and routes                    |
+| Routes        | Names, methods, paths, controllers           |
+| Repositories  | Public custom methods                        |
+| Events        | Event class names and dispatching metadata   |
+| Forms         | Field names, types and options               |
 
 
 ## Output example

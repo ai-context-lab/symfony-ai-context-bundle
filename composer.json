@@ -40,6 +40,14 @@
     "extra": {
         "branch-alias": {
             "dev-main": "1.0-dev"
+        },
+        "symfony": {
+            "bundle": {
+                "env": {
+                    "dev": true,
+                    "test": true
+                }
+            }
         }
     },
     "config": {
