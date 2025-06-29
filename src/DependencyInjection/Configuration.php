@@ -26,6 +26,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('controllers')->defaultTrue()->end()
                         ->booleanNode('repositories')->defaultTrue()->end()
                         ->booleanNode('events')->defaultTrue()->end()
+                        ->booleanNode('forms')->defaultTrue()->end()
                     ->end()
                 ->end()
 
@@ -51,6 +52,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('events')
                             ->scalarPrototype()->end()
                             ->defaultValue(['src/Event'])
+                        ->end()
+                        ->arrayNode('forms')
+                          ->scalarPrototype()->end()
+                          ->defaultValue(['src/Form'])
                         ->end()
                     ->end()
                 ->end()

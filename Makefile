@@ -1,5 +1,5 @@
 phpstan:
-	vendor/bin/phpstan analyse --configuration=phpstan.neon.dist
+	php -d memory_limit=512M vendor/bin/phpstan analyse --configuration=phpstan.neon.dist
 
 release:
 	@if [ -z "$(VERSION)" ]; then \

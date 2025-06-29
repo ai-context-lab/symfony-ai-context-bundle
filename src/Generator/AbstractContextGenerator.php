@@ -12,8 +12,14 @@ abstract class AbstractContextGenerator
      */
     protected function findClasses(array $paths): array
     {
+        $existingPaths = array_filter($paths, fn(string $path) => is_dir($path));
+
+        if (empty($existingPaths)) {
+            return [];
+        }
+
         $finder = new Finder();
-        $finder->files()->in($paths)->name('*.php');
+        $finder->files()->in($existingPaths)->name('*.php');
 
         $classes = [];
 

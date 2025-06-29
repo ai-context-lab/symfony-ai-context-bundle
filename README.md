@@ -54,12 +54,14 @@ ai_context:
         controllers: true
         repositories: true
         events: true
+        forms: true
     paths:
-        entities: '%kernel.project_dir%/src/Entity'
-        services: '%kernel.project_dir%/src/Service'
-        controllers: '%kernel.project_dir%/src/Controller'
-        repository: '%kernel.project_dir%/src/Repository'
-        events: '%kernel.project_dir%/src/Event'
+        entities: ['%kernel.project_dir%/src/Entity']
+        services: ['%kernel.project_dir%/src/Service']
+        controllers: ['%kernel.project_dir%/src/Controller']
+        repositories: ['%kernel.project_dir%/src/Repository']
+        events: ['%kernel.project_dir%/src/Event']
+        forms: ['%kernel.project_dir%/src/Form']
 ```
 
 ## Usage
@@ -83,7 +85,7 @@ The command outputs a structured JSON file (by default in var/ai_context/ai-cont
     📚 Repositories: custom public methods
 
 
-## Ouput example
+## Output example
 
 ```JSON
 {

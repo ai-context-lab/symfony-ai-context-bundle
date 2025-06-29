@@ -22,7 +22,9 @@
         "doctrine/doctrine-bundle": "^2.14",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-symfony": "^2.0",
-        "phpstan/extension-installer": "^1.4"
+        "phpstan/extension-installer": "^1.4",
+        "symfony/form": "^6.0 || ^7.0",
+        "symfony/yaml": "^7.3"
     },
     "autoload": {
         "psr-4": {

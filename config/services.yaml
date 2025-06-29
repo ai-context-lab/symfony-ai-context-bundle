@@ -36,6 +36,11 @@ services:
         arguments:
             $eventPaths: '%ai_context.paths.events%'
 
+    AiContextBundle\Generator\FormContextGenerator:
+        autowire: true
+        arguments:
+            $formPaths: '%ai_context.paths.forms%'
+
     AiContextBundle\Service\ChecksumService:
         arguments:
             $checksumFile: '%ai_context.output_dir_checksum%'
