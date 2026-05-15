@@ -46,7 +46,7 @@ Configure the bundle in `config/packages/ai_context.yaml` you can edit the defau
 ai_context:
     output_dir: '%kernel.project_dir%/var/ai_context'
     output_filename: 'ai-context.json'
-    output_dir_checksum: '%kernel.project_dir%/var/ai-context/ai-context-checksum.json'
+    output_dir_checksum: '%kernel.project_dir%/var/ai_context/ai-context-checksum.json'
     include:
         routes: true
         entities: true
